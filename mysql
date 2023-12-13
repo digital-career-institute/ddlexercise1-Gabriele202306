@@ -1,0 +1,170 @@
+mysql> CREATE TABLE Movies(
+    -> movie_id INTEGER PRIMARY KEY,
+    -> title VARCHAR(100),
+    -> director VARCHAR(50),
+    -> release_year INTEGER,
+    -> genre VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> ALTER TABLE Movies;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ADD COLUMN rating DECIMAL(3,1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ADD COLUMN rating DECIMAL(3,1)' at line 1
+mysql> ADD COLUMN rating DECIMAL(3, 1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ADD COLUMN rating DECIMAL(3, 1)' at line 1
+mysql> ALTER TABLE Movies ADD COLUMN rating DECIMAL(3,1);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Movies;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| movie_id     | int          | NO   | PRI | NULL    |       |
+| title        | varchar(100) | YES  |     | NULL    |       |
+| director     | varchar(50)  | YES  |     | NULL    |       |
+| release_year | int          | YES  |     | NULL    |       |
+| genre        | varchar(50)  | YES  |     | NULL    |       |
+| rating       | decimal(3,1) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Students()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> CREATE TABLE Students(
+    -> student_id INTEGER PRIMARY KEY,
+    -> student_name VARCHAR(50),
+    -> age INTEGER,
+    -> grade VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> DESCRIBE Students;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| student_id   | int          | NO   | PRI | NULL    |       |
+| student_name | varchar(50)  | YES  |     | NULL    |       |
+| age          | int          | YES  |     | NULL    |       |
+| grade        | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> DROP TABLE STudents;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_db1 |
++---------------+
+| movies        |
+| users         |
+| users2        |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Events(
+    -> event_id INTEGER PRIMARY KEY,
+    -> event_name VARCHAR(100),
+    -> date DATE,
+    -> location VARCHAR(100);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> CREATE TABLE Events(
+    ->     -> event_id INTEGER PRIMARY KEY,
+    ->     -> event_name VARCHAR(100),
+    ->     -> date DATE,
+    ->     -> location VARCHAR(100)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> event_id INTEGER PRIMARY KEY,
+    -> event_name VARCHAR(100),
+    -> date DAT' at line 2
+mysql> Create TABLE Events (
+    -> event_id INTEGER PRIMARY KEY,
+    -> event_name VARCHAR(100),
+    -> date DATE,
+    -> location VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO Events(event_id, event_name, date, location) VALUES
+    -> (1, 'MovieNight','2023-12-13','Berlin'),
+    -> (2, 'MusicDATE', '2023-12-14','Hamburg'),
+    -> (1, 'MovieNight', '2023-12-15','Hamburg');
+ERROR 1062 (23000): Duplicate entry '1' for key 'events.PRIMARY'
+mysql> INSERT INTO Events(event_id, event_name, date, location) VALUES
+    ->     -> (1, 'MovieNight','2023-12-13','Berlin'),
+    ->     -> (2, 'MusicDATE', '2023-12-14','Hamburg'),
+    ->     -> (3, 'MovieNight', '2023-12-15','Hamburg');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> (1, 'MovieNight','2023-12-13','Berlin'),
+    -> (2, 'MusicDATE', '2023-12-14'' at line 2
+mysql>  INSERT INTO Events(event_id, event_name, date, location) VALUES
+    ->     ->     -> (1, 'MovieNight','2023-12-13','Berlin'),
+    ->     ->     -> (2, 'MusicDATE', '2023-12-14','Hamburg'),
+    ->     ->     -> (2, 'MusicDATE','2023-12-14','Hamburg'),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->     -> (1, 'MovieNight','2023-12-13','Berlin'),
+    ->     -> (2, 'MusicDATE'' at line 2
+mysql> INSERT INTO Events(event_id, event_name, date, location) VALUES
+    -> (1, 'MovieNight','2023-12-13','Berlin'),
+    -> (2, 'MusicDATE','2023-12-14','Hamburg'),
+    -> (3, 'MoviNight','2023-12-15','Berlin');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> Describe Events;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| event_id   | int          | NO   | PRI | NULL    |       |
+| event_name | varchar(100) | YES  |     | NULL    |       |
+| date       | date         | YES  |     | NULL    |       |
+| location   | varchar(100) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> Show Events;
+Empty set (0.01 sec)
+
+mysql>  select * from Events;
++----------+------------+------------+----------+
+| event_id | event_name | date       | location |
++----------+------------+------------+----------+
+|        1 | MovieNight | 2023-12-13 | Berlin   |
+|        2 | MusicDATE  | 2023-12-14 | Hamburg  |
+|        3 | MoviNight  | 2023-12-15 | Berlin   |
++----------+------------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> Truncate Table Events;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from Events;
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE Restaurants (
+    -> restaurant_id INTEGER PRIMARY KEY,
+    -> name VARCHAR(50),
+    -> cuisine VARCHAR(50),
+    -> location VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> ALTER TABLE Restaurants RENAME TO DiningSpotsBERLIN;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_db1     |
++-------------------+
+| diningspotsberlin |
+| events            |
+| movies            |
+| users             |
+| users2            |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql>
